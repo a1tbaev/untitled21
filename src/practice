@@ -1,0 +1,21 @@
+select * from products full join product_info pi on products.id = pi.product_id;
+select * from products join product_info pi on products.id = pi.product_id;
+select * from products left join product_info pi on products.id = pi.product_id;
+select name,expiration_date from products join product_info pi on products.id = pi.product_id;
+select *, country from products join product_info pi on products.id = pi.product_id where country ilike 'M%';
+select first_name,basket_name from baskets join customers c on c.id = baskets.customer_id order by basket_name;
+select first_name,basket_name from customers join baskets b on customers.id = b.customer_id order by basket_name desc;
+select first_name,name from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id;
+select first_name,name, description,price from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id;
+select  country, first_name, count(*) from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id join product_info pi on p.id = pi.product_id  group by country, first_name having count(*)>1;
+select country, count(*) from product_info group by country;
+select first_name, round(sum(price)) as summa from customers join baskets b on customers.id = b.customer_id  join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id group by first_name;
+select name,expiration_date from products join product_info pi on products.id = pi.product_id where expiration_date between '1-1-2021' and '1-1-2023';
+select country, name, price-products.price from products join product_info pi on products.id = pi.product_id where expiration_date between '1-1-2022' and '31-12-2022';
+select round(sum(price)) as summa from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id  join products p on p.id = pb.product_id;
+select first_name, name, colour from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id join product_info pi on p.id = pi.product_id;
+select price from products as products_sum; -- i have not a weight field
+select first_name, basket_name from customers join baskets b on customers.id = b.customer_id where email like '%com';
+select first_name, name,description from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id where phone_number IS NULL;
+select colour, count(*) from product_info group by colour;
+select first_name,name, count(*) from customers join baskets b on customers.id = b.customer_id join product_basket pb on b.id = pb.basket_id join products p on p.id = pb.product_id join product_info pi on p.id = pi.product_id group by country, first_name, name having count(*)>1;
